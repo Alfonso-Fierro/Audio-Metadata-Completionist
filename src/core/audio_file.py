@@ -106,7 +106,7 @@ class AudioFile:
         Returns:
             Audio format details
         """
-        if not self._mutagen_file:
+        if self._mutagen_file is None:
             raise RuntimeError("Audio file not loaded")
 
         info = self._mutagen_file.info
@@ -128,7 +128,7 @@ class AudioFile:
         Returns:
             Metadata object with existing tags
         """
-        if not self._mutagen_file:
+        if self._mutagen_file is None:
             raise RuntimeError("Audio file not loaded")
 
         # Extract basic tags
@@ -181,7 +181,7 @@ class AudioFile:
         Raises:
             RuntimeError: If write fails
         """
-        if not self._mutagen_file:
+        if self._mutagen_file is None:
             raise RuntimeError("Audio file not loaded")
 
         try:
