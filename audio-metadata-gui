@@ -1,0 +1,28 @@
+#!/bin/bash
+# GUI Launcher script for Audio Metadata Completionist
+
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Check if we should activate venv
+if [[ -d "$SCRIPT_DIR/.venv" ]] && [[ -z "$VIRTUAL_ENV" ]]; then
+    source "$SCRIPT_DIR/.venv/bin/activate"
+fi
+
+# Check if tkinter is available
+if ! python3 -c "import tkinter" 2>/dev/null; then
+    echo "Error: tkinter is not installed!"
+    echo ""
+    echo "To install tkinter on Ubuntu/Debian:"
+    echo "  sudo apt-get install python3-tk"
+    echo ""
+    echo "To install on Fedora/RHEL:"
+    echo "  sudo dnf install python3-tkinter"
+    echo ""
+    echo "To install on Arch:"
+    echo "  sudo pacman -S tk"
+    exit 1
+fi
+
+# Run the GUI application
+python3 "$SCRIPT_DIR/gui.py"
