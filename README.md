@@ -36,7 +36,7 @@ Professional-grade audio metadata enrichment tool that automatically identifies 
 **Ubuntu/Debian:**
 ```bash
 sudo apt-get update
-sudo apt-get install -y python3.10 python3-pip libchromaprint-tools
+sudo apt-get install -y python3.10 python3-pip python3-tk libchromaprint-tools
 ```
 
 **macOS (using Homebrew):**
@@ -83,6 +83,22 @@ Get your free AcousticID API key from: https://acoustid.org/api-key
 
 ## 📖 Usage
 
+### Graphical User Interface (GUI)
+
+For the easiest experience, especially with folders containing Unicode characters or spaces in their names:
+
+```bash
+python gui.py
+```
+
+The GUI provides:
+- **Simple folder selection** - Browse and select any folder, including those with Unicode characters
+- **Visual options** - Toggle settings with checkboxes
+- **Real-time feedback** - See processing status and results
+- **No command-line complexity** - Perfect for users who prefer a visual interface
+
+![GUI Screenshot](docs/gui-screenshot.png)
+
 ### Command Line Interface
 
 #### Enrich Audio Files
@@ -95,6 +111,11 @@ python main.py enrich /path/to/song.mp3
 Process an entire directory:
 ```bash
 python main.py enrich /path/to/music/folder
+```
+
+**Note:** For paths with spaces or Unicode characters, use quotes:
+```bash
+python main.py enrich "/path/to/ペルソナ3 リロード オリジナル・サウンドトラック - ATLUS Sound Team"
 ```
 
 Process with options:
@@ -193,7 +214,8 @@ Audio-Metadata-Completionist/
 ├── tests/                  # Comprehensive test suite
 │   ├── unit/
 │   └── integration/
-├── main.py                 # Entry point
+├── main.py                 # CLI entry point
+├── gui.py                  # GUI entry point
 └── requirements.txt
 ```
 
@@ -341,7 +363,7 @@ If you encounter any issues or have questions:
 
 - [ ] Add more artwork providers (Spotify, Deezer, Last.fm)
 - [ ] Support for additional audio formats
-- [ ] GUI interface
+- [x] GUI interface
 - [ ] Batch metadata editor
 - [ ] Automatic folder organization
 - [ ] Duplicate detection
