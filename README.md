@@ -27,6 +27,7 @@ Professional-grade audio metadata enrichment tool that automatically identifies 
 
 - Python 3.10 or higher
 - Chromaprint/fpcalc for audio fingerprinting
+- FFmpeg for audio decoding
 - AcousticID API key (free registration at https://acoustid.org/api-key)
 
 ## 🚀 Installation
@@ -36,16 +37,17 @@ Professional-grade audio metadata enrichment tool that automatically identifies 
 **Ubuntu/Debian:**
 ```bash
 sudo apt-get update
-sudo apt-get install -y python3.10 python3-pip python3-tk libchromaprint-tools
+sudo apt-get install -y python3.10 python3-pip python3-tk libchromaprint-tools ffmpeg
 ```
 
 **macOS (using Homebrew):**
 ```bash
-brew install python@3.10 chromaprint
+brew install python@3.10 chromaprint ffmpeg
 ```
 
 **Windows:**
-Download and install Chromaprint from: https://acoustid.org/chromaprint
+1. Download and install Chromaprint from: https://acoustid.org/chromaprint
+2. Download and install FFmpeg from: https://ffmpeg.org/download.html
 
 ### 2. Clone the Repository
 
@@ -351,11 +353,66 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Mutagen](https://mutagen.readthedocs.io/) - Audio metadata library
 - [Chromaprint](https://acoustid.org/chromaprint) - Audio fingerprinting library
 
+## 🔍 Troubleshooting
+
+### "audio could not be decoded" Error
+
+If you see errors like `Fingerprinting error: audio could not be decoded` or `AcousticID identification failed: audio could not be decoded`, this means the required system dependencies are not installed.
+
+**Solution:**
+
+1. **Verify fpcalc is installed:**
+   ```bash
+   which fpcalc
+   fpcalc -version
+   ```
+
+2. **Verify ffmpeg is installed:**
+   ```bash
+   which ffmpeg
+   ffmpeg -version
+   ```
+
+3. **If missing, install the dependencies:**
+
+   **Ubuntu/Debian:**
+   ```bash
+   sudo apt-get update
+   sudo apt-get install -y libchromaprint-tools ffmpeg
+   ```
+
+   **macOS:**
+   ```bash
+   brew install chromaprint ffmpeg
+   ```
+
+   **Windows:**
+   - Download Chromaprint: https://acoustid.org/chromaprint
+   - Download FFmpeg: https://ffmpeg.org/download.html
+   - Add both to your system PATH
+
+### API Key Issues
+
+If you get errors about missing API keys:
+
+1. Register for a free AcousticID API key: https://acoustid.org/api-key
+2. Add it to your `.env` file:
+   ```bash
+   ACOUSTID_API_KEY=your_api_key_here
+   ```
+
+### Unicode Path Issues
+
+If you have issues with folders containing Unicode characters (Japanese, Chinese, etc.):
+
+- **Use the GUI** (`python gui.py`) instead of the CLI for better Unicode path handling
+- The GUI provides a visual folder browser that handles Unicode paths correctly
+
 ## 📧 Support
 
 If you encounter any issues or have questions:
 
-1. Check the [documentation](README.md)
+1. Check the [documentation](README.md) and [Troubleshooting](#-troubleshooting) section
 2. Search [existing issues](https://github.com/Alfonso-Fierro/Audio-Metadata-Completionist/issues)
 3. Create a [new issue](https://github.com/Alfonso-Fierro/Audio-Metadata-Completionist/issues/new)
 
